@@ -1,6 +1,12 @@
 # online_photo_libery
 
-A new Flutter project.
+A new Flutter project. Project include dependencies:
+    image_picker: ^0.8.7+1
+    flutter_bloc: ^8.1.2
+    firebase_auth: ^4.3.0
+    firebase_core: ^2.8.0
+    firebase_storage: ^11.0.16
+    uuid: ^3.0.7 
 
 ## Getting Started
 
