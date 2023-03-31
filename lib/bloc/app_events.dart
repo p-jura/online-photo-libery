@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart' show immutable;
+part of 'app_bloc.dart';
 
 @immutable
 abstract class AppEvent {
