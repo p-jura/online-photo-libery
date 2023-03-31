@@ -1,7 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart' show immutable;
-import 'package:online_photo_libery/auth/auth_error.dart';
+part of 'app_bloc.dart';
 
 @immutable
 abstract class AppState {
@@ -10,7 +7,7 @@ abstract class AppState {
 
   const AppState({
     required this.isLoading,
-    required this.authError,
+    this.authError,
   });
 }
 
@@ -23,7 +20,7 @@ class AppStateLoggedIn extends AppState {
     required this.user,
     required this.images,
     required super.isLoading,
-    required super.authError,
+    super.authError,
   });
   @override
   bool operator ==(other) {
@@ -50,7 +47,7 @@ class AppStateLoggedIn extends AppState {
 class AppStateLogOut extends AppState {
   const AppStateLogOut({
     required super.isLoading,
-    required super.authError,
+    super.authError,
   });
   @override
   String toString() =>
@@ -60,7 +57,7 @@ class AppStateLogOut extends AppState {
 @immutable
 class AppStateIsInRegistrationView extends AppState {
   const AppStateIsInRegistrationView(
-      {required super.isLoading, required super.authError});
+      {required super.isLoading, super.authError});
 }
 
 extension GetUser on AppState {
@@ -75,7 +72,7 @@ extension GetUser on AppState {
 }
 
 extension GetImages on AppState {
-  Iterable<Reference>? get user {
+  Iterable<Reference>? get images {
     final presentState = this;
     if (presentState is AppStateLoggedIn) {
       return presentState.images;
