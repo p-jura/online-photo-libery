@@ -85,7 +85,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             email: email,
             password: password,
           );
-          final userId = credentials.user!.uid;
+          
           emit(
             AppStateLoggedIn(
               user: credentials.user!,
