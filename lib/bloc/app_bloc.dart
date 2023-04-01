@@ -35,13 +35,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         );
         final email = event.email;
         final password = event.password;
-        final userCredential =
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
 
         try {
+          final userCredential =
+              await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
           final user = userCredential.user;
           final images = await _getImages(user!.uid);
           emit(
@@ -85,7 +85,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             email: email,
             password: password,
           );
-          
+
           emit(
             AppStateLoggedIn(
               user: credentials.user!,
@@ -161,7 +161,18 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           final folderContents =
               await FirebaseStorage.instance.ref(user.uid).listAll();
           for (var item in folderContents.items) {
-            await item.delete().catchError((_) {});
+            await item.delete().catchError((e) {
+              if (e is FirebaseAuthException) {
+                emit(
+                  AppStateLoggedIn(
+                    images: state.images ?? [],
+                    user: user,
+                    isLoading: true,
+                    authError: AuthError.fromExeption(e),
+                  ),
+                );
+              }
+            });
           }
           await FirebaseStorage.instance
               .ref(user.uid)

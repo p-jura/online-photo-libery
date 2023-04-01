@@ -6,7 +6,7 @@ Future<void> showAuthErrorDialog({
   required BuildContext context,
   required AuthError error,
 }) async {
-  return await showGenericDialog<void>(
+  return showGenericDialog<void>(
     context: context,
     title: error.title,
     content: error.dialog,
