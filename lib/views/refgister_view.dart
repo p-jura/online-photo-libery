@@ -4,8 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:online_photo_libery/bloc/app_bloc.dart';
 import 'package:online_photo_libery/extension/if_debugging.dart';
 
-class LoginView extends HookWidget {
-  const LoginView({super.key});
+class RegisterView extends HookWidget {
+  const RegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class LoginView extends HookWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Log in',
+          'Register',
         ),
       ),
       body: Padding(
@@ -44,24 +44,24 @@ class LoginView extends HookWidget {
                 final email = emailController.text;
                 final password = passwordController.text;
                 context.read<AppBloc>().add(
-                      AppEventLogIn(
+                      AppEventRegister(
                         email: email,
                         password: password,
                       ),
                     );
               },
               child: const Text(
-                'Log in',
+                'Register',
               ),
             ),
             TextButton(
               onPressed: () {
                 context.read<AppBloc>().add(
-                      const AppEventGoToRegistration(),
+                      const AppEventGoToLogin(),
                     );
               },
               child: const Text(
-                'Not registered? Register here.',
+                'You have an account? Log in here.',
               ),
             ),
           ],
