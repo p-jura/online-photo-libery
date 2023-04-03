@@ -174,10 +174,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
               }
             });
           }
-          await FirebaseStorage.instance
-              .ref(user.uid)
-              .delete()
-              .catchError((_) {});
           await user.delete();
           await FirebaseAuth.instance.signOut();
           emit(const AppStateLogOut(

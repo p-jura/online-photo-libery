@@ -35,7 +35,7 @@ class ImagesView extends StatelessWidget {
               return const CircularProgressIndicator();
             }
         }
-        return const Text('something went wrong');
+        return Container();
       },
     );
   }

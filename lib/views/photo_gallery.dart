@@ -1,4 +1,4 @@
-
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +27,6 @@ class PhotoGallery extends HookWidget {
               if (image == null) {
                 return;
               }
-              
               context.read<AppBloc>().add(
                     AppEventUploadImage(
                       filePathToUpload: image.path,
